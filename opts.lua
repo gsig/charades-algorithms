@@ -66,7 +66,7 @@ function M.parse(arg)
    cmd:option('-optimState',   'none', 'Path to an optimState to reload from')
    ---------- Model options ----------------------------------
    cmd:option('-shareGradInput',  'false', 'Share gradInput tensors to reduce memory usage')
-   cmd:option('-optnet',          'false',  'Use optnet to reduce memory usage')
+   cmd:option('-optnet',          'true',  'Use optnet to reduce memory usage')
    cmd:option('-resetClassifier', 'false', 'Reset the fully connected layer for fine-tuning')
    cmd:option('-nClasses',         157,    'Number of classes in the dataset')
    cmd:text()

@@ -32,7 +32,7 @@ morearg = {
 '-data','/mnt/raid00/gunnars/Charades_v1_rgb/',
 '-trainfile','../Charades_v1_train.csv',
 '-testfile','../Charades_v1_test.csv',
-'-optnet','false',
+'-optnet','true',
 }
 for _,v in pairs(morearg) do
     table.insert(arg,v)

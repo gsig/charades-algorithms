@@ -36,9 +36,8 @@ All output files can be scored with the official MATLAB evaluation script provid
 Requirements:
 csvigo: luarocks install csvigo
 loadcaffe: luarocks install loadcaffe
-
-Optional:
 optnet: luarocks install optnet
+(The flow net requires optnet to converge with the current default settings for the parameters)
 
 For speed:
 Facebook Lua Libraries, (a) faster loading of images, which is useful for flow, and (b) fb.debugger, a great debugger
