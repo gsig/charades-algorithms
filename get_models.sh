@@ -4,4 +4,4 @@
 wget https://dl.dropboxusercontent.com/u/10728218/models/VGG_ILSVRC_16_layers_deploy.prototxt
 wget https://dl.dropboxusercontent.com/u/10728218/models/VGG_UCF101_16_layers_deploy.prototxt
 wget https://dl.dropboxusercontent.com/u/10728218/models/VGG_ILSVRC_16_layers.caffemodel
-wget https://dl.dropboxusercontent.com/u/10728218/models/VGG_UCF101_16_layers_deploy.prototxt
+wget https://dl.dropboxusercontent.com/u/10728218/models/VGG_UCF101_16_layers.caffemodel
