@@ -15,7 +15,7 @@ require 'cunn'
 require 'loadcaffe'
 
 local function createModel(opt)
-   local model = loadcaffe.load('../VGG_ILSVRC_16_layers_deploy.prototxt','../VGG_ILSVRC_16_layers.caffemodel','cudnn')
+   local model = loadcaffe.load(opt.pretrainpath .. 'VGG_ILSVRC_16_layers_deploy.prototxt', opt.pretrainpath .. 'VGG_ILSVRC_16_layers.caffemodel','cudnn')
 
    print(' => Replacing classifier with ' .. opt.nClasses .. '-way classifier')
 
