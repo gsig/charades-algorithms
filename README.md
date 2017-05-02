@@ -67,7 +67,7 @@ While the RGB net can be trained in a day on a modern GPU, the flow net requires
 https://dl.dropboxusercontent.com/u/10728218/models/twostream_flow.t7
 https://dl.dropboxusercontent.com/u/10728218/models/twostream_rgb.t7
 
-* The flow model was obtained after 62 epochs (epochSize=0.1)
+* The flow model was obtained after 31 epochs (epochSize=0.2)
 * The flow model has a classification accuracy of 15.4% mAP (evalated with charades_v1_classify.m)
 * The rgb model was obtained after 6 epochs (epochSize=0.1)
 * The rgb model has a classification accuracy of 15.6% mAP (evalated with charades_v1_classify.m)
