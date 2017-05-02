@@ -2,7 +2,7 @@
 # Script to download pretrained models on Charades
 # Approximately equivalent to models obtained by running exp/rgbnet.lua and exp/flownet.lua
 #
-# The flow model was obtained after 62 epochs (epochSize=0.1)
+# The flow model was obtained after 31 epochs (epochSize=0.2)
 # The flow model has a classification accuracy of 15.4% mAP (via charades_v1_classify.m)
 # The rgb model was obtained after 6 epochs (epochSize=0.1)
 # The rgb model has a classification accuracy of 15.6% mAP (via charades_v1_classify.m)
