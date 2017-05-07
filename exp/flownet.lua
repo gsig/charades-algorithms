@@ -27,11 +27,11 @@ morearg = {
 '-conv5LR','1',
 '-batchSize','64',
 '-accumGrad','4',
-'-trainfile','Charades/Charades_v1_train.csv',
-'-testfile','Charades/Charades_v1_test.csv', 
+'-trainfile','../Charades_v1_train.csv',
+'-testfile','../Charades_v1_test.csv',
 '-optnet','true',
-'-cacheDir','/nfs.yoda/gsigurds/ai2/caches/',
-'-data','/scratch/gsigurds/Charades_v1_flow/',
+'-cacheDir','/mnt/raid00/gunnars/cache/',
+'-data','/mnt/raid00/gunnars/Charades_v1_flow/',
 }
 for _,v in pairs(morearg) do
     table.insert(arg,v)
