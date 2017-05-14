@@ -3,12 +3,13 @@
 Contributor: Gunnar Atli Sigurdsson
 
 * This code implements a Two-Stream network in Torch
+* This code implements a Two-Stream+LSTM network in Torch
 * This code is built of the Res-Net Torch source code: github.com/facebook/fb.resnet.torch
-* This code awkwardly hacks said code to work as Two-Stream
+* This code awkwardly hacks said code to work as Two-Stream/LSTM
 * Some functionality from original code may work (optnet)
 * Some functionality from original code may not work (resnet)
 
-The code replicates the 'Two-Stream Extended' baseline found in:
+The code replicates the 'Two-Stream Extended' and 'Two-Stream+LSTM' baselines found in:
 ```
 @inproceedings{sigurdsson2017asynchronous,
 author = {Gunnar A. Sigurdsson and Santosh Divvala and Ali Farhadi and Abhinav Gupta},
@@ -19,10 +20,10 @@ pdf = {http://arxiv.org/pdf/1612.06371.pdf},
 code = {https://github.com/gsig/temporal-fields},
 }
 ```
-which is in turn based off "Two-stream convolutional networks for action recognition in videos" by Simonyan and Zisserman.
+which is in turn based off "Two-stream convolutional networks for action recognition in videos" by Simonyan and Zisserman, and "Beyond Short Snippets: Deep Networks for Video Classification" by Joe Yue-Hei Ng el al.
 
 Combining the predictions (submission files) of those models using combine_rgb_flow.py
-yields a final classification accuracy of 18.9% mAP on Charades (evalated with charades_v1_classify.m)
+yields a final classification accuracy of 18.9% mAP (Two-Stream) and 19.8% (LSTM) on Charades (evalated with charades_v1_classify.m)
 
 
 ## Technical Overview:
@@ -44,6 +45,7 @@ Requirements:
 Optional requirements:
 * Facebook Lua Libraries, for speedups and fb.debugger, a great debugger
 Please refer to the original res-net codebase for more information.
+
 
 ## Steps to train your own two-stream network on Charades:
  
@@ -77,3 +79,9 @@ yields a final classification accuracy of 18.9% mAP (evalated with charades_v1_c
 
 To fine-tune those models, or run experiments, please see exp/rgbnet_resume.lua, exp/rgbnet_test.lua, exp/flownet_resume.lua, and exp/flownet_test.lua
 
+
+## Two-Stream+LSTM details
+
+We also provide pre-trained LSTM models using exp/lstmrgbnet.lua and exp/lstmflownet.lua, please see get_alreadytrained_lstm.sh for details.
+
+This baseline fine-tunes the previous Two-Stream models with a LSTM on top of fc7. It uses a special loader for Charades (charadessync), that feeds in a full video for each batch, to train an LSTM. To accomodate the softmax loss, (frame,label) pairs are randomly sampled for the training set. exp/lstmrgnet.lua, models/vgg16lstm.lua, and datasets/charadessync-gen.lua contain more details.

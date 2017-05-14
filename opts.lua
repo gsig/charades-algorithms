@@ -127,6 +127,16 @@ function M.parse(arg)
          cmd:error('error: missing Charadesflow data directory')
       end
       opt.nEpochs = opt.nEpochs == 0 and 1 or opt.nEpochs
+   elseif opt.dataset == 'charadessync' then
+      if not paths.dirp(opt.data) then
+         cmd:error('error: missing Charades data directory')
+      end
+      opt.nEpochs = opt.nEpochs == 0 and 1 or opt.nEpochs
+   elseif opt.dataset == 'charadessyncflow' then
+      if not paths.dirp(opt.data) then
+         cmd:error('error: missing Charadesflow data directory')
+      end
+      opt.nEpochs = opt.nEpochs == 0 and 1 or opt.nEpochs
    else
       cmd:error('unknown dataset: ' .. opt.dataset)
    end

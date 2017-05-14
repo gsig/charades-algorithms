@@ -48,13 +48,14 @@ function DataLoader:__init(dataset, opt, split)
    self.threads = threads
    self.__size = sizes[1][1]
    self.split = split
+   self.synchronous = (opt.dataset=='charadessync') or (opt.dataset=='charadessyncflow')
    self.epochSize = tonumber(opt.epochSize)
    if self.epochSize and (self.epochSize < 1) then
-       self.epochSize = torch.floor(self.epochSize * self.__size)
+       self.epochSize = torch.floor(self.epochSize * self.__size / opt.batchSize) * opt.batchSize
    end
    self.testSize = tonumber(opt.testSize)
    if self.testSize and (self.testSize < 1) then
-       self.testSize = torch.floor(self.testSize * self.__size)
+       self.testSize = torch.floor(self.testSize * self.__size / opt.batchSize) * opt.batchSize
    end
    if split=='val2' then
        self.batchSize = 25
@@ -82,15 +83,23 @@ function DataLoader:run()
        if self.epochSize and not (self.epochSize==1) then
            -- Ensure each sample is seen equally often
            -- but reduce the epochSize
-           if not self.perm then self.perm = torch.randperm(size) end
+           if not self.perm then 
+               self.perm = torch.randperm(size) 
+               if self.synchronous then self.perm = torch.range(1,size) end
+           end
            if self.perm:size(1) <= self.epochSize then
-               self.perm = self.perm:cat(torch.randperm(size),1)
+               if self.synchronous then 
+                   self.perm = self.perm:cat(torch.range(1,size),1)
+               else
+                   self.perm = self.perm:cat(torch.randperm(size),1)
+               end
            end
            perm = self.perm[{{1,self.epochSize}}]
            self.perm = self.perm[{{self.epochSize+1,-1}}]
            size = self.epochSize
        else
            perm = torch.randperm(size)
+           if self.synchronous then perm = torch.range(1,size) end
        end
    elseif self.split=='val' then
        perm = torch.range(1,size)

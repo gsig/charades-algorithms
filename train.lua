@@ -109,6 +109,13 @@ function Trainer:train(opt, epoch, dataloader)
       local batchSize = output:size(1)
       local loss = self.criterion:forward(self.model.output, self.target)
 
+      if dataloader.synchronous then
+          -- Double check that dataloader is giving one video per batch
+          for i=1,batchSize-1 do -- make sure there is no error in the loader, this should be one video
+              assert(sample.ids[{{i}}]==sample.ids[{{i+1}}],"Training set batch size and current batch size do not match!")
+          end
+      end
+
       self.criterion:backward(self.model.output, self.target)
       self.model:backward(self.input, self.criterion.gradInput)
       --require('fb.debugger'):enter()
@@ -370,6 +377,8 @@ function Trainer:learningRateModifier(epoch)
       decay = math.floor((epoch - 1) / 30)
    elseif self.opt.dataset == 'cifar10' then
       decay = epoch >= 122 and 2 or epoch >= 81 and 1 or 0
+   else
+      decay = math.floor((epoch - 1) / self.LR_decay_freq)
    end
    return math.pow(0.1, decay)
 end
