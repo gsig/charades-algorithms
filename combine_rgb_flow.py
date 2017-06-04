@@ -25,7 +25,7 @@ flow = loadfile(flowfile)
 rgbdict = dict(rgb)
 flowdict = dict(flow)
 
-keys = list(set(streamdict.keys()+flowdict.keys()))
+keys = list(set(rgbdict.keys()+flowdict.keys()))
 w = [x/sum(w) for x in w]
 
 def normme(x):
@@ -44,8 +44,8 @@ def lookup(d,key):
 for id0 in keys:
     r = lookup(rgbdict,id0)
     f = lookup(flowdict,id0)
-    out = r*w[0]+f*w[1] -- unnormalized combination
-    #out = normme(r)*w[0]+normme(f)*w[1] -- normalize first
-    #out = np.exp(np.log(f)*w[0]+np.log(f)*w[1]) -- weighted geometric mean
+    out = r*w[0]+f*w[1] #unnormalized combination
+    #out = normme(r)*w[0]+normme(f)*w[1] #normalize first
+    #out = np.exp(np.log(f)*w[0]+np.log(f)*w[1]) #weighted geometric mean
     out = [str(x) for x in out]
     print('{} {}'.format(id0,' '.join(out)))
