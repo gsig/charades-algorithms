@@ -46,6 +46,6 @@ for id0 in keys:
     f = lookup(flowdict,id0)
     out = r*w[0]+f*w[1] #unnormalized combination
     #out = normme(r)*w[0]+normme(f)*w[1] #normalize first
-    #out = np.exp(np.log(f)*w[0]+np.log(f)*w[1]) #weighted geometric mean
+    #out = np.exp(np.log(r)*w[0]+np.log(f)*w[1]) #weighted geometric mean
     out = [str(x) for x in out]
     print('{} {}'.format(id0,' '.join(out)))
