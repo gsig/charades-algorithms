@@ -12,11 +12,16 @@ from itertools import groupby
 rgbfile = sys.argv[1]
 flowfile = sys.argv[2]
 w = [0.5,0.5]
+nclasses = 157
 
 def loadfile(path):
     with open(path) as f:
         lines = [x.strip().split(' ') for x in f.readlines()]
-    data = [(x[0],np.array([float(y) for y in x[1:]])) for x in lines]
+    localization = len(lines[0]) == nclasses+2
+    if localization:
+        data = [(x[0]+' '+x[1],np.array([float(y) for y in x[2:]])) for x in lines]
+    else:
+        data = [(x[0],np.array([float(y) for y in x[1:]])) for x in lines]
     return data
 
 rgb = loadfile(rgbfile)
@@ -39,7 +44,7 @@ def lookup(d,key):
         return d[key]
     else:
         sys.stderr.write('error ' + key + '\n')
-        return np.zeros((157,))
+        return np.zeros((nclasses,))
 
 for id0 in keys:
     r = lookup(rgbdict,id0)
