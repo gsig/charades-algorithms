@@ -2,6 +2,8 @@
 
 Contributor: Gunnar Atli Sigurdsson
 
+**New:** extension of this framework to the deep CRF model on Charades for *Asynchronous Temporal Fields for Action Recognition*: https://github.com/gsig/temporal-fields
+
 * This code implements a Two-Stream network in Torch
 * This code implements a Two-Stream+LSTM network in Torch
 * This code is built of the Res-Net Torch source code: github.com/facebook/fb.resnet.torch
