@@ -10,5 +10,5 @@
 # Combining the predictions (submission files) of those models using combine_rgb_flow.py
 # yields a final classification accuracy of 19.8% mAP (via charades_v1_classify.m)
 
-wget https://dl.dropboxusercontent.com/u/10728218/models/lstm_flow.t7
-wget https://dl.dropboxusercontent.com/u/10728218/models/lstm_rgb.t7
+wget -O lstm_flow.t7 https://www.dropbox.com/s/gj808t2izq2el4e/lstm_flow.t7?dl=1
+wget -O lstm_rgb.t7 https://www.dropbox.com/s/t7n0ivjj15v75kt/lstm_rgb.t7?dl=1
