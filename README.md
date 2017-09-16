@@ -68,8 +68,8 @@ Good luck!
 
 While the RGB net can be trained in a day on a modern GPU, the flow net requires nontrivial IO and time to converge. For your convenience we provide RGB and Flow models already trained on Charades using exp/rgbnet.lua and exp/flownet.lua
 
-https://dl.dropboxusercontent.com/u/10728218/models/twostream_flow.t7
-https://dl.dropboxusercontent.com/u/10728218/models/twostream_rgb.t7
+https://www.dropbox.com/s/o7afkhw52rqr48g/twostream_flow.t7?dl=1
+https://www.dropbox.com/s/bo9rv32zaxojsmz/twostream_rgb.t7?dl=1
 
 * The flow model was obtained after 31 epochs (epochSize=0.2)
 * The flow model has a classification accuracy of 15.4% mAP (evalated with charades_v1_classify.m)
