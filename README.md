@@ -81,6 +81,7 @@ yields a final classification accuracy of 18.9% mAP (evalated with charades_v1_c
 
 To fine-tune those models, or run experiments, please see exp/rgbnet_resume.lua, exp/rgbnet_test.lua, exp/flownet_resume.lua, and exp/flownet_test.lua
 
+Charades submission files are available for multiple baselines at https://github.com/gsig/temporal-fields
 
 ## Two-Stream+LSTM details
 
