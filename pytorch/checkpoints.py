@@ -11,12 +11,12 @@ def load(args, model, optimizer):
             print("=> loading checkpoint '{}'".format(args.resume))
             checkpoint = torch.load(args.resume)
             args.start_epoch = checkpoint['epoch']
-            best_mAP = checkpoint['best_mAP']
+            mAP = checkpoint['mAP']
             model.load_state_dict(checkpoint['state_dict'])
             optimizer.load_state_dict(checkpoint['optimizer'])
             print("=> loaded checkpoint '{}' (epoch {})"
                   .format(args.resume, checkpoint['epoch']))
-            return best_mAP
+            return mAP
         else:
             raise ValueError("no checkpoint found at '{}'".format(args.resume))
     return 0

@@ -10,8 +10,8 @@ def parse():
                         help='path to dataset')
     parser.add_argument('--dataset', metavar='DIR', default='fake',
                         help='name of dataset under datasets/')
-    parser.add_argument('--train-file', default='../Charades_v1_train.csv', type=str)
-    parser.add_argument('--val-file', default='../Charades_v1_test.csv', type=str)
+    parser.add_argument('--train-file', default='./Charades_v1_train.csv', type=str)
+    parser.add_argument('--val-file', default='./Charades_v1_test.csv', type=str)
     parser.add_argument('--arch', '-a', metavar='ARCH', default='alexnet',
                         help='model architecture: ')
     parser.add_argument('-j', '--workers', default=4, type=int, metavar='N',
