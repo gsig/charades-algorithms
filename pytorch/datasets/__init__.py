@@ -9,7 +9,7 @@ import importlib
 
 def get_dataset(args):
     dataset = importlib.import_module('.'+args.dataset, package='datasets')
-    train_dataset, val_dataset, val2_dataset = dataset.get(args)
+    train_dataset, val_dataset, valvideo_dataset = dataset.get(args)
 
     if args.distributed:
         train_sampler = torch.utils.data.distributed.DistributedSampler(
@@ -26,8 +26,8 @@ def get_dataset(args):
         val_dataset, batch_size=args.batch_size, shuffle=True,
         num_workers=args.workers, pin_memory=True)
 
-    val2_loader = torch.utils.data.DataLoader(
-        val2_dataset, batch_size=25, shuffle=False,
+    valvideo_loader = torch.utils.data.DataLoader(
+        valvideo_dataset, batch_size=25, shuffle=False,
         num_workers=args.workers, pin_memory=True)
 
-    return train_loader, val_loader, val2_loader
+    return train_loader, val_loader, valvideo_loader

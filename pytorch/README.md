@@ -20,7 +20,7 @@ code = {https://github.com/gsig/temporal-fields},
 which is in turn based off "Two-stream convolutional networks for action recognition in videos" by Simonyan and Zisserman, and "Beyond Short Snippets: Deep Networks for Video Classification" by Joe Yue-Hei Ng el al.
 
 Combining the predictions (submission files) of those models using combine_rgb_flow.py
-yields a final classification accuracy of 18.9% mAP (Two-Stream) and 19.8% (LSTM) on Charades (evalated with charades_v1_classify.m)
+yields a final classification accuracy of 20.6% mAP (Two-Stream) and on Charades (evalated with charades_v1_classify.m)
 
 
 ## Technical Overview:
@@ -57,14 +57,18 @@ Good luck!
 While the RGB net can be trained in a day on a modern GPU, the flow net requires nontrivial IO and time to converge. For your convenience we provide RGB and Flow models already trained on Charades using exp/rgbnet.py and exp/flownet.py
 
 https://www.dropbox.com/s/p457h2ifi6v1qdz/twostream_rgb.pth.tar?dl=1
+https://www.dropbox.com/s/m1hkeiwjtndt26z/twostream_flow.pth?dl=1
 
 * The rgb model was obtained after 7 epochs (epochSize=0.1)
-* The rgb model has a classification accuracy of 15.9% mAP (evalated with charades_v1_classify.m)
+* The rgb model has a classification accuracy of 18.6% mAP (evalated with charades_v1_classify.m)
+* The flow model was converted directly from the Charades Torch codebase (../torch/)
+* The flow model has a classification accuracy of 15.4% mAP (via charades_v1_classify.m)
 
 Combining the predictions (submission files) of those models using combine_rgb_flow.py
-yields a final classification accuracy of 18.9% mAP (evalated with charades_v1_classify.m)
+yields a final classification accuracy of 20.6% mAP (evalated with charades_v1_classify.m)
 
-To fine-tune those models, or run experiments, please see exp/rgbnet_test.py
+To fine-tune those models, or run experiments, please see exp/rgbnet_test.py and exp/flownet_test.py
+
 
 Charades submission files are available for multiple baselines at https://github.com/gsig/temporal-fields
 

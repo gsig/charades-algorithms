@@ -177,7 +177,7 @@ def get(args):
             transforms.ToTensor(),
             normalize,
         ]))
-    val2_dataset = Charades(
+    valvideo_dataset = Charades(
         args.data, 'val_video', val_file, args.cache,
         transform=transforms.Compose([
             transforms.Resize(256),
@@ -185,4 +185,4 @@ def get(args):
             transforms.ToTensor(),
             normalize,
         ]))
-    return train_dataset, val_dataset, val2_dataset
+    return train_dataset, val_dataset, valvideo_dataset

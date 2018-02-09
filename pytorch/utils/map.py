@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def mAP(submission_array, gt_array):
+def map(submission_array, gt_array):
     """ Returns mAP, weighted mAP, and AP array """
     m_aps = []
     n_classes = submission_array.shape[1]
@@ -26,3 +26,14 @@ def mAP(submission_array, gt_array):
     m_ap = np.mean(m_aps)
     w_ap = (m_aps * gt_array.sum(axis=0) / gt_array.sum().sum().astype(float))
     return m_ap, w_ap, m_aps
+
+
+def charades_map(submission_array, gt_array):
+    """ 
+    Approximate version of the charades evaluation function
+    For precise numbers, use the submission file with the official matlab script
+    """
+    fix = submission_array.copy()
+    empty = np.sum(gt_array, axis=1)==0
+    fix[empty, :] = np.NINF
+    return map(fix, gt_array)

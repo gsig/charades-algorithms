@@ -23,4 +23,4 @@ def get(args):
             normalize,
         ]))
 
-    return train_dataset, val_dataset
+    return train_dataset, val_dataset, val_dataset

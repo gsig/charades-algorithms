@@ -1,4 +1,4 @@
-""" Defines the Trainer class which handles train/validation/validation2 
+""" Defines the Trainer class which handles train/validation/validation_video
 """
 import time
 import torch
@@ -59,9 +59,6 @@ def submission_file(ids, outputs, filename):
 
 
 class Trainer():
-    def __init__(self):
-        pass
-
     def train(self, loader, model, criterion, optimizer, epoch, args):
         adjust_learning_rate(args.lr, args.lr_decay_rate, optimizer, epoch)
         batch_time = AverageMeter()
@@ -142,7 +139,7 @@ class Trainer():
                       'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
                       'Prec@1 {top1.val:.3f} ({top1.avg:.3f})\t'
                       'Prec@5 {top5.val:.3f} ({top5.avg:.3f})'.format(
-                          i, int(len(loader)*args.train_size), len(loader),
+                          i, int(len(loader)*args.val_size), len(loader),
                           batch_time=batch_time, loss=losses,
                           top1=top1, top5=top5))
 
@@ -151,7 +148,7 @@ class Trainer():
 
         return top1.avg,top5.avg
 
-    def validate2(self, loader, model, epoch, args):
+    def validate_video(self, loader, model, epoch, args):
         """ Run video-level validation on the Charades test set"""
         batch_time = AverageMeter()
         outputs = []
@@ -167,6 +164,7 @@ class Trainer():
             assert target[0,:].eq(target[1,:]).all(), "val_video not synced"
             input_var = torch.autograd.Variable(input.cuda(), volatile=True)
             output = model(input_var)
+            output = torch.nn.Softmax(dim=1)(output)
 
             # store predictions
             output_video = output.mean(dim=0)
@@ -180,7 +178,8 @@ class Trainer():
                 print('Test2: [{0}/{1}]\t'
                       'Time {batch_time.val:.3f} ({batch_time.avg:.3f})'.format(
                           i, len(loader), batch_time=batch_time))
-        mAP, _, ap = map.mAP(np.vstack(outputs), np.vstack(gts))
+        #mAP, _, ap = map.map(np.vstack(outputs), np.vstack(gts))
+        mAP, _, ap = map.charades_map(np.vstack(outputs), np.vstack(gts))
         print(ap)
         print(' * mAP {:.3f}'.format(mAP))
         submission_file(
