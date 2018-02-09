@@ -1,4 +1,4 @@
-## Charades Starter Code for Activity Classification and Localization in Torch and PyTorch
+## Charades Starter Code for Activity Recognition in Torch and PyTorch
 
 Contributor: Gunnar Atli Sigurdsson
 
