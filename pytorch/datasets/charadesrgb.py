@@ -162,7 +162,7 @@ def get(args):
     train_dataset = Charades(
         args.data, 'train', train_file, args.cache,
         transform=transforms.Compose([
-            transforms.RandomResizedCrop(224),
+            transforms.RandomResizedCrop(args.inputsize),
             transforms.ColorJitter(
                 brightness=0.4, contrast=0.4, saturation=0.4),
             transforms.RandomHorizontalFlip(),
@@ -172,16 +172,16 @@ def get(args):
     val_dataset = Charades(
         args.data, 'val', val_file, args.cache,
         transform=transforms.Compose([
-            transforms.Resize(256),
-            transforms.CenterCrop(224),
+            transforms.Resize(int(256./224*args.inputsize)),
+            transforms.CenterCrop(args.inputsize),
             transforms.ToTensor(),
             normalize,
         ]))
     valvideo_dataset = Charades(
         args.data, 'val_video', val_file, args.cache,
         transform=transforms.Compose([
-            transforms.Resize(256),
-            transforms.CenterCrop(224),
+            transforms.Resize(int(256./224*args.inputsize)),
+            transforms.CenterCrop(args.inputsize),
             transforms.ToTensor(),
             normalize,
         ]))

@@ -80,8 +80,13 @@ class Trainer():
             input_var = torch.autograd.Variable(input.cuda())
             target_var = torch.autograd.Variable(target)
             output = model(input_var)
-            loss = criterion(output, target_var)
-
+            loss = None
+            # for nets that have multiple outputs such as inception
+            if isinstance(output, tuple):
+                loss = sum((criterion(o,target_var) for o in output))
+                output = output[0]
+            else:
+                loss = criterion(output, target_var)
             prec1, prec5 = accuracy(output.data, target, topk=(1, 5))
             losses.update(loss.data[0], input.size(0))
             top1.update(prec1[0], input.size(0))

@@ -38,6 +38,7 @@ def parse():
     parser.add_argument('--pretrained', dest='pretrained', action='store_true',
                         help='use pre-trained model')
     parser.add_argument('--pretrained-weights', default='', type=str)
+    parser.add_argument('--inputsize', default=224, type=int)
     parser.add_argument('--world-size', default=1, type=int,
                         help='number of distributed processes')
     parser.add_argument('--manual-seed', default=0, type=int)

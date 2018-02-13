@@ -70,6 +70,11 @@ yields a final classification accuracy of 20.6% mAP (evalated with charades_v1_c
 To fine-tune those models, or run experiments, please see exp/rgbnet_test.py and exp/flownet_test.py
 
 
+Additionally we include rgb-streams fine-tuned from resnet and inception pretrained on ImageNet:
+* ResNet-152 (exp/rgbnet_resnet.py): 22.8% mAP (via charades_v1_classify.m)
+* https://www.dropbox.com/s/iy9fmk0r1a3edoz/resnet_rgb.pth.tar?dl=1
+* Inception_v3 (exp/rgbnet_inception.py): 22.7% mAP (via charades_v1_classify.m)
+* https://www.dropbox.com/s/whxikophm7xqchb/inception_rgb.pth.tar?dl=1
+
+
 Charades submission files are available for multiple baselines at https://github.com/gsig/temporal-fields
-
-

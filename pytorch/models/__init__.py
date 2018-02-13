@@ -28,12 +28,16 @@ def create_model(args):
 
     # replace last layer
     if hasattr(model, 'classifier'):
-        newcls = list(model.classifier.children())[:-1]
-        newcls += [nn.Linear(4096, args.nclass).cuda()]
+        newcls = list(model.classifier.children())
+        newcls = newcls[:-1] + [nn.Linear(newcls[-1].in_features, args.nclass).cuda()]
         model.classifier = nn.Sequential(*newcls)
+    elif hasattr(model, 'fc'):
+        model.fc = nn.Linear(model.fc.in_features, args.nclass)
+        if hasattr(model, 'AuxLogits'):
+            model.AuxLogits.fc = nn.Linear(model.AuxLogits.fc.in_features, args.nclass)
     else:
         newcls = list(model.children())[:-1]
-        newcls += [nn.Linear(4096, args.nclass).cuda()]
+        newcls = newcls[:-1] + [nn.Linear(newcls[-1].in_features, args.nclass).cuda()]
         model = nn.Sequential(*newcls)
 
     if args.distributed:
