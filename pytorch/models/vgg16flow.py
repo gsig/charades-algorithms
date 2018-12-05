@@ -60,3 +60,4 @@ model = nn.Sequential( # Sequential,
 	nn.Dropout(0.8),
 	nn.Sequential(Lambda(lambda x: x.view(1,-1) if 1==len(x.size()) else x ),nn.Linear(4096,101)), # Linear,
 )
+model.in_features = 4096
